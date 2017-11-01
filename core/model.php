@@ -23,13 +23,11 @@ class ConnectionManager
         if (ConnectionManager::$conn->connect_error) {
             die("Connection failed: " . ConnectionManager::$conn->connect_error);
         }
-//        echo "<p>Inited DB Connection</p>";
         return ConnectionManager::$conn;
     }
     public static function Close(){
         if(ConnectionManager::$conn!=null){
             ConnectionManager::$conn->close();
-//            echo "Closing DB Connection";
         }
 
     }

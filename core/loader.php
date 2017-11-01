@@ -9,10 +9,12 @@
 class Loader
 {
     public $parentClass;
+    public $load;
 
     public function __construct($parentClass = null)
     {
         $this->parentClass = $parentClass;
+        $this->load = $this;
     }
 
     public static function LoadController($controllerName,$actionName='')
@@ -26,6 +28,7 @@ class Loader
     }
     public function view($viewName,$data = array()){
         $viewFilePath = AppFolder . "views/$viewName.php";
+
         extract($data);
         include($viewFilePath);
     }

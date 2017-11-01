@@ -1,2 +1,4 @@
 <?php
-print_r($users);
+foreach($users as $user){
+    $this->load->view('user',$user);
+}
