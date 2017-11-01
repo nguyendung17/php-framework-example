@@ -14,21 +14,22 @@ class ConnectionManager
         if (ConnectionManager::$conn != null) {
             return ConnectionManager::$conn;
         }
+        $database = ConfigManager::GetDbConfig();
         ConnectionManager::$conn = new mysqli(
-            ConfigManager::$database['host'],
-            ConfigManager::$database['username'], ConfigManager::$database['password'],
-            ConfigManager::$database['name']);
+            $database['host'],
+            $database['username'], $database['password'],
+            $database['name']);
         // Check connection
         if (ConnectionManager::$conn->connect_error) {
             die("Connection failed: " . ConnectionManager::$conn->connect_error);
         }
-        echo "<p>Inited DB Connection</p>";
+//        echo "<p>Inited DB Connection</p>";
         return ConnectionManager::$conn;
     }
     public static function Close(){
         if(ConnectionManager::$conn!=null){
             ConnectionManager::$conn->close();
-            echo "Closing DB Connection";
+//            echo "Closing DB Connection";
         }
 
     }

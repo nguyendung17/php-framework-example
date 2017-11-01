@@ -1,10 +1,9 @@
 <?php
 
 class ConfigManager{
-    public static $database = array(
-        'host'=>'localhost',
-        'username'=>'root',
-        'password'=>'',
-        'name'=>'tets'
-    );
+    public static function GetDbConfig(){
+        $config = parse_ini_file(AppFolder."config/database.ini",true);
+        return $config['database'];
+    }
 }
+

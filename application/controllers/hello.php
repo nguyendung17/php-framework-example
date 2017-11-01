@@ -4,10 +4,8 @@ class hello extends BaseController {
     {
         parent::__construct();
         $this->load->model("UserModel");
-        echo '<pre>';
-        print_r( $this->UserModel->getAll());
     }
     function index(){
-
+        $this->load->view("test", array('users'=>$this->UserModel->getAll()));
     }
 }

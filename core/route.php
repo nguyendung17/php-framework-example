@@ -2,10 +2,9 @@
 
 $url =  $_SERVER['QUERY_STRING'];
 $data = explode('/',$url);
-if(count($data)>2){
+if(count($data)>1){
     $controllerName = $data[1];
-    $actionName = $data[2];
-    require_once "application/controllers/$controllerName.php";
-    $x = new Loader();
-    $x->loadClass($controllerName);
+    $actionName = isset($data[2])?$data[2]:'';
+    Loader::LoadController($controllerName,$actionName);
+
 }
