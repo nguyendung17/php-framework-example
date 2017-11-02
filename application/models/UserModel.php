@@ -6,7 +6,7 @@
  * Time: 1:25 PM
  */
 
-class UserModel extends BaseModel
+class UserModel extends DbModel
 {
     public $table = "users";
 

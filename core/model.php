@@ -8,6 +8,7 @@
 class ConnectionManager
 {
     public static $conn = null;
+    public static $debug = null;
 
     public static function Open()
     {
@@ -15,11 +16,11 @@ class ConnectionManager
             return ConnectionManager::$conn;
         }
         $database = ConfigManager::GetDbConfig();
+        ConnectionManager::$debug = $database['debug'];
         ConnectionManager::$conn = new mysqli(
             $database['host'],
             $database['username'], $database['password'],
             $database['name']);
-        // Check connection
         if (ConnectionManager::$conn->connect_error) {
             die("Connection failed: " . ConnectionManager::$conn->connect_error);
         }
@@ -41,7 +42,7 @@ class BaseModel
         $this->db = ConnectionManager::Open();
     }
 
-    public function query($sql)
+    public function raw($sql)
     {
         $result = $this->db->query($sql);
         $data = array();
@@ -51,11 +52,5 @@ class BaseModel
             }
         }
         return $data;
-    }
-
-    public function getAll()
-    {
-        $sql = "select * from $this->table";
-        return $this->query($sql);
     }
 }
